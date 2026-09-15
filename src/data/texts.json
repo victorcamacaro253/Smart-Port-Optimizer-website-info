@@ -1,0 +1,738 @@
+{
+  "portOptimizer": {
+    "es": {
+      "hero": {
+        "title": "Optimizador Inteligente de Terminal Portuaria",
+        "subtitle": "Gemelo Digital de Optimización Portuaria Multi-Terminal",
+        "description": "Sistema avanzado de simulación y optimización de operaciones portuarias inspirado en PSA Singapore. Combina 6 ramas de IA para optimizar el atraque, la estiba, la programación de grúas y el flujo de camiones, cumpliendo con normativas IMO y objetivos de sostenibilidad.",
+        "badges": [
+          "OR-Tools CP-SAT",
+          "SimPy",
+          "Three.js",
+          "OSMnx",
+          "Large Neighborhood Search"
+        ]
+      },
+      "stats": [
+        {
+          "value": "4",
+          "label": "Terminales Reales Modeladas"
+        },
+        {
+          "value": "960",
+          "label": "Jobs Procesados en Simulación"
+        },
+        {
+          "value": "12.9%",
+          "label": "Viajes Vacíos (vs 50% baseline)"
+        },
+        {
+          "value": "100%",
+          "label": "Cumplimiento ETD en Simulaciones"
+        }
+      ],
+      "terminals": [
+        {
+          "name": "PSA Pasir Panjang",
+          "description": "Terminal moderno de alta capacidad",
+          "cranes": 6,
+          "bays": 36,
+          "maxJobs": 120,
+          "specialization": "General",
+          "image": "/images/terminals/pasir-panjang.jpg"
+        },
+        {
+          "name": "PSA Keppel",
+          "description": "Terminal más grande para Ultra Large Container Vessels",
+          "cranes": 7,
+          "bays": 42,
+          "maxJobs": 140,
+          "specialization": "Ultra Large",
+          "image": "/images/terminals/Keppel.webp"
+        },
+        {
+          "name": "PSA Brani",
+          "description": "Especializado en contenedores refrigerados y peligrosos",
+          "cranes": 7,
+          "bays": 38,
+          "maxJobs": 80,
+          "specialization": "Reefer/Dangerous",
+          "image": "/images/terminals/Brani.webp"
+        },
+        {
+          "name": "PSA Tanjong Pagar",
+          "description": "Terminal histórico para contenedores generales",
+          "cranes": 5,
+          "bays": 30,
+          "maxJobs": 100,
+          "specialization": "General",
+          "image": "/images/terminals/Tanjong-Pagar.jpg"
+        }
+      ],
+      "kpis": {
+        "maritime": {
+          "title": "KPIs Marítimos",
+          "metrics": [
+            "Tiempo estimado de estadía del buque: ~8.7 - 11.7 horas",
+            "Eficiencia de Paralelismo de Grúas: 28% - 37%",
+            "Utilización de Quay: 6.7% - 13.7%",
+            "Tiempo promedio de movimiento de grúas: 1.3 - 1.6 min"
+          ]
+        },
+        "terrestrial": {
+          "title": "KPIs Terrestres (Flujo Intermodal)",
+          "metrics": [
+            "Truck Turnaround Time promedio: 2.1 - 2.8 min",
+            "Espera promedio en Gate: 2.0 - 68.6 min (según terminal)",
+            "Utilización de Yard: 7.4% - 16.5%",
+            "Utilización de Tractores Internos: 1.9% - 4.0%"
+          ]
+        },
+        "safety": {
+          "title": "KPIs de Seguridad IMO (Prioridades)",
+          "metrics": [
+            "Camiones prioritarios atendidos con espera mínima (< 1.5 min)",
+            "Camiones normales atendidos eficientemente",
+            "Prioridad respetada: Prioritarios esperan significativamente menos que normales"
+          ]
+        }
+      },
+      "features": [
+        {
+          "title": "Berth Allocation Problem (BAP) Dinámico",
+          "desc": "Asignación en 3 olas temporales con ciclo de zarpe y liberación automática del 50% de la capacidad del terminal."
+        },
+        {
+          "title": "Balanceo Multi-Terminal con LNS",
+          "desc": "Large Neighborhood Search para distribuir carga entre las 4 terminales considerando especialización y capacidad, logrando un desbalance < 20%."
+        },
+        {
+          "title": "Estiba y Schedule con CP-SAT",
+          "desc": "Optimización matemática garantizada para ≤60 jobs y heurística Greedy+Local Search escalable para >60 jobs, con restricciones de no-cruce de grúas."
+        },
+        {
+          "title": "Enrutamiento Geoespacial Real",
+          "desc": "Cálculo de rutas reales sobre el grafo de calles de Singapur (24,233 nodos, 46,127 aristas) usando OSMnx y NetworkX, eliminando distorsiones de línea recta."
+        },
+        {
+          "title": "Trip Chaining Inteligente",
+          "desc": "Consolidación de viajes de import/export para reducir los viajes vacíos de camiones del 50% al 12.9%, ahorrando costos y emisiones."
+        },
+        {
+          "title": "Visualización 3D y Mapas Animados",
+          "desc": "Digital Twin 3D interactivo con Three.js (geografía realista de Singapur) y mapas 2D animados con Leaflet mostrando rutas en tiempo real."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Mapa Animado Multi-Terminal",
+          "file": "data/results/multi_terminal_map.html",
+          "icon": "map"
+        },
+        {
+          "name": "Visualización 3D Geográfica",
+          "file": "data/results/port_3d_pro.html",
+          "icon": "cube"
+        },
+        {
+          "name": "Logs de Simulación Detallados",
+          "file": "data/logs/simulation.log",
+          "icon": "file-text"
+        }
+      ],
+      "resultsSectionTitle": "Resultados de la Simulación",
+      "resultsSectionSubtitle": "960 jobs procesados en 4 terminales con eficiencia optimizada",
+      "results": [
+        {
+          "value": "22",
+          "title": "Barcos Zarparon",
+          "description": "En 3 olas dinámicas con liberación del 50% de capacidad",
+          "color": "blue"
+        },
+        {
+          "value": "12.9%",
+          "title": "Viajes Vacíos",
+          "description": "Reducción del 50% al 12.9% con Trip Chaining",
+          "color": "green"
+        },
+        {
+          "value": "85.71",
+          "title": "kg CO2/TEU",
+          "description": "Emisiones medidas con precisión por contenedor",
+          "color": "purple"
+        }
+      ],
+      "architectureSectionTitle": "Arquitectura Técnica",
+      "architectureSectionSubtitle": "Sistema modular con 6 capas desacopladas",
+      "architecture": [
+        {
+          "icon": "🎯",
+          "title": "Optimización",
+          "description": "OR-Tools CP-SAT para programación de grúas con restricciones de no-cruce"
+        },
+        {
+          "icon": "⚙️",
+          "title": "Simulación",
+          "description": "SimPy para modelado de flujo Gate → Yard → Quay con tiempos estocásticos"
+        },
+        {
+          "icon": "🗺️",
+          "title": "Geoespacial",
+          "description": "OSMnx + NetworkX para cálculo de rutas reales sobre el grafo de calles"
+        },
+        {
+          "icon": "🎨",
+          "title": "Visualización 3D",
+          "description": "Three.js + WebGL para Digital Twin interactivo con navegación completa"
+        },
+        {
+          "icon": "📊",
+          "title": "Dashboard",
+          "description": "Streamlit + Plotly para KPIs en tiempo real y análisis What-If"
+        },
+        {
+          "icon": "🌱",
+          "title": "Green Port",
+          "description": "Cálculo dinámico de emisiones CO2 por fuente e intensidad de carbono"
+        }
+      ],
+      "problemsSolved": [
+        {
+          "icon": "faShip",
+          "title": "Grúas Ineficientes",
+          "desc": "Calculamos la secuencia perfecta de operaciones, reduciendo movimientos innecesarios y tiempos de descarga."
+        },
+        {
+          "icon": "faTruck",
+          "title": "Camiones Esperando",
+          "desc": "Coordinación sincronizada Gate → Yard → Quay, reduciendo esperas a 0.0-1.2 min."
+        },
+        {
+          "icon": "faAnchor",
+          "title": "Atraque de Barcos (BAP)",
+          "desc": "Asignación dinámica en 3 olas con ciclo de zarpe, procesando 22 de 24 barcos eficientemente."
+        },
+        {
+          "icon": "faLeaf",
+          "title": "Emisiones Contaminantes",
+          "desc": "Cálculo dinámico de CO2, logrando 83.46 kg CO2/TEU y cumpliendo con el MPA Green Port Programme."
+        }
+      ],
+      "terminalCases": [
+        {
+          "name": "Pasir Panjang",
+          "jobs": 240,
+          "ships": 6,
+          "wait": "0.0 min",
+          "efficiency": "13.9%"
+        },
+        {
+          "name": "Keppel",
+          "jobs": 280,
+          "ships": 7,
+          "wait": "0.0 min",
+          "efficiency": "10.0%"
+        },
+        {
+          "name": "Brani",
+          "jobs": 160,
+          "ships": 4,
+          "wait": "0.0 min",
+          "efficiency": "9.8%"
+        },
+        {
+          "name": "Tanjong Pagar",
+          "jobs": 200,
+          "ships": 5,
+          "wait": "0.1 min",
+          "efficiency": "15.3%"
+        }
+      ],
+      "techStack": [
+        "Google OR-Tools",
+        "SimPy",
+        "Three.js",
+        "OSMnx",
+        "NetworkX",
+        "Streamlit",
+        "Python",
+        "Large Neighborhood Search"
+      ],
+      "stakeholdersTitle": "¿Por Qué Esto Importa?",
+      "stakeholdersSubtitle": "Impacto real en cada actor de la cadena logística portuaria.",
+      "stakeholders": [
+        {
+          "icon": "faBuilding",
+          "title": "Autoridades Portuarias (MPA)",
+          "benefits": [
+            "Mayor competitividad global del puerto",
+            "Reducción de emisiones alineada con metas IMO 2023",
+            "Menor congestión en calles aledañas",
+            "Datos precisos para planificación de infraestructura"
+          ]
+        },
+        {
+          "icon": "faShip",
+          "title": "Navieras",
+          "benefits": [
+            "Barcos a tiempo, sin retrasos costosos",
+            "Menor costo operativo (estadía reducida)",
+            "Previsibilidad total de operaciones",
+            "Cumplimiento ambiental Green Port Programme"
+          ]
+        },
+        {
+          "icon": "faTruck",
+          "title": "Transportistas",
+          "benefits": [
+            "Menos tiempo de espera = más viajes por día",
+            "Rutas optimizadas, menor consumo de combustible",
+            "Operación predecible sin sorpresas",
+            "Prioridad clara para contenedores especiales"
+          ]
+        },
+        {
+          "icon": "faUsers",
+          "title": "Clientes Finales",
+          "benefits": [
+            "Entregas más rápidas",
+            "Menor costo de productos",
+            "Impacto ambiental positivo",
+            "Trazabilidad completa de la carga"
+          ]
+        },
+        {
+          "icon": "faLeaf",
+          "title": "Singapur como Ciudad",
+          "benefits": [
+            "Posicionamiento como puerto más inteligente del mundo",
+            "Reducción de congestión vehicular",
+            "Liderazgo en sostenibilidad portuaria",
+            "Atracción de más tráfico marítimo global"
+          ]
+        }
+      ],
+      "comparisonTitle": "Lo Que Nos Hace Únicos",
+      "comparisonSubtitle": "Comparación directa entre sistemas tradicionales y nuestra solución.",
+      "comparisonFeatureLabel": "Característica",
+      "comparisonTraditionalLabel": "Sistemas Tradicionales",
+      "comparisonOurSystemLabel": "Nuestro Sistema",
+      "comparison": [
+        {
+          "feature": "Planificación",
+          "traditional": "Manual o reglas simples",
+          "ours": "IA con CP-SAT + BAP Dinámico"
+        },
+        {
+          "feature": "Tiempo de espera",
+          "traditional": "30-60 minutos",
+          "ours": "0.0-1.2 min"
+        },
+        {
+          "feature": "Viajes vacíos",
+          "traditional": "50%",
+          "ours": "12.9%"
+        },
+        {
+          "feature": "Emisiones CO2",
+          "traditional": "No medidas",
+          "ours": "85.71 kg CO2/TEU"
+        },
+        {
+          "feature": "Prioridades",
+          "traditional": "Manuales",
+          "ours": "Automáticas (IMO)"
+        },
+        {
+          "feature": "Multi-terminal",
+          "traditional": "No coordinado",
+          "ours": "Balanceo LNS automático"
+        },
+        {
+          "feature": "Gestión de barcos",
+          "traditional": "Estática",
+          "ours": "BAP 3 olas + zarpe dinámico"
+        },
+        {
+          "feature": "Visualización",
+          "traditional": "2D básica",
+          "ours": "3D profesional + 2D animado"
+        },
+        {
+          "feature": "Jobs procesados",
+          "traditional": "40-120",
+          "ours": "880 jobs (24 barcos)"
+        }
+      ],
+      "viewAllResultsBtn": "Ver Todos los Resultados",
+      "viewArchitectureBtn": "Ver Arquitectura Completa"
+    },
+    "en": {
+      "hero": {
+        "title": "Smart Port Terminal Optimizer",
+        "subtitle": "Multi-Terminal Port Optimization Digital Twin",
+        "description": "Advanced simulation and optimization system for port operations inspired by PSA Singapore. Combines 6 branches of AI to optimize berthing, stowage, crane scheduling, and truck flow, complying with IMO regulations and sustainability goals.",
+        "badges": [
+          "OR-Tools CP-SAT",
+          "SimPy",
+          "Three.js",
+          "OSMnx",
+          "Large Neighborhood Search"
+        ]
+      },
+      "stats": [
+        {
+          "value": "4",
+          "label": "Real Terminals Modeled"
+        },
+        {
+          "value": "960",
+          "label": "Jobs Processed in Simulation"
+        },
+        {
+          "value": "12.9%",
+          "label": "Empty Trips (vs 50% baseline)"
+        },
+        {
+          "value": "100%",
+          "label": "ETD Compliance in Simulations"
+        }
+      ],
+      "terminals": [
+        {
+          "name": "PSA Pasir Panjang",
+          "description": "Modern high-capacity terminal",
+          "cranes": 6,
+          "bays": 36,
+          "maxJobs": 120,
+          "specialization": "General",
+          "image": "/images/terminals/pasir-panjang.jpg"
+        },
+        {
+          "name": "PSA Keppel",
+          "description": "Largest terminal for Ultra Large Container Vessels",
+          "cranes": 7,
+          "bays": 42,
+          "maxJobs": 140,
+          "specialization": "Ultra Large",
+          "image": "/images/terminals/keppel.jpg"
+        },
+        {
+          "name": "PSA Brani",
+          "description": "Specialized in reefer and dangerous containers",
+          "cranes": 7,
+          "bays": 38,
+          "maxJobs": 80,
+          "specialization": "Reefer/Dangerous",
+          "image": "/images/terminals/brani.jpg"
+        },
+        {
+          "name": "PSA Tanjong Pagar",
+          "description": "Historic terminal for general containers",
+          "cranes": 5,
+          "bays": 30,
+          "maxJobs": 100,
+          "specialization": "General",
+          "image": "/images/terminals/tanjong-pagar.jpg"
+        }
+      ],
+      "kpis": {
+        "maritime": {
+          "title": "Maritime KPIs",
+          "metrics": [
+            "Estimated ship stay time: ~8.7 - 11.7 hours",
+            "Crane Parallelism Efficiency: 28% - 37%",
+            "Quay Utilization: 6.7% - 13.7%",
+            "Average crane movement time: 1.3 - 1.6 min"
+          ]
+        },
+        "terrestrial": {
+          "title": "Terrestrial KPIs (Intermodal Flow)",
+          "metrics": [
+            "Average Truck Turnaround Time: 2.1 - 2.8 min",
+            "Average Gate Wait Time: 2.0 - 68.6 min (by terminal)",
+            "Yard Utilization: 7.4% - 16.5%",
+            "Internal Tractor Utilization: 1.9% - 4.0%"
+          ]
+        },
+        "safety": {
+          "title": "IMO Safety KPIs (Priorities)",
+          "metrics": [
+            "Priority trucks served with minimal wait (< 1.5 min)",
+            "Normal trucks handled efficiently",
+            "Priority respected: Priority vehicles wait significantly less than normal ones"
+          ]
+        }
+      },
+      "features": [
+        {
+          "title": "Dynamic Berth Allocation Problem (BAP)",
+          "desc": "Assignment in 3 temporal waves with sailing cycle and automatic 50% terminal capacity release."
+        },
+        {
+          "title": "Multi-Terminal Balancing with LNS",
+          "desc": "Large Neighborhood Search to distribute load across 4 terminals considering specialization and capacity, achieving < 20% imbalance."
+        },
+        {
+          "title": "Stowage & Schedule with CP-SAT",
+          "desc": "Guaranteed mathematical optimization for ≤60 jobs and scalable Greedy+Local Search heuristic for >60 jobs, with no-crane-crossing constraints."
+        },
+        {
+          "title": "Real Geospatial Routing",
+          "desc": "Real route calculation over Singapore's street graph (24,233 nodes, 46,127 edges) using OSMnx and NetworkX, eliminating straight-line distortions."
+        },
+        {
+          "title": "Smart Trip Chaining",
+          "desc": "Consolidation of import/export trips to reduce empty truck trips from 50% to 12.9%, saving costs and emissions."
+        },
+        {
+          "title": "3D Visualization & Animated Maps",
+          "desc": "Interactive 3D Digital Twin with Three.js (realistic Singapore geography) and 2D animated maps with Leaflet showing real-time routes."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Multi-Terminal Animated Map",
+          "file": "data/results/multi_terminal_map.html",
+          "icon": "map"
+        },
+        {
+          "name": "Geographic 3D Visualization",
+          "file": "data/results/port_3d_pro.html",
+          "icon": "cube"
+        },
+        {
+          "name": "Detailed Simulation Logs",
+          "file": "data/logs/simulation.log",
+          "icon": "file-text"
+        }
+      ],
+      "resultsSectionTitle": "Simulation Results",
+      "resultsSectionSubtitle": "960 jobs processed across 4 terminals with optimized efficiency",
+      "results": [
+        {
+          "value": "22",
+          "title": "Ships Departed",
+          "description": "In 3 dynamic waves with 50% capacity release",
+          "color": "blue"
+        },
+        {
+          "value": "12.9%",
+          "title": "Empty Trips",
+          "description": "Reduction from 50% to 12.9% with Trip Chaining",
+          "color": "green"
+        },
+        {
+          "value": "85.71",
+          "title": "kg CO2/TEU",
+          "description": "Emissions precisely measured per container",
+          "color": "purple"
+        }
+      ],
+      "architectureSectionTitle": "Technical Architecture",
+      "architectureSectionSubtitle": "Modular system with 6 decoupled layers",
+      "architecture": [
+        {
+          "icon": "🎯",
+          "title": "Optimization",
+          "description": "OR-Tools CP-SAT for crane scheduling with no-crossing constraints"
+        },
+        {
+          "icon": "⚙️",
+          "title": "Simulation",
+          "description": "SimPy for modeling Gate → Yard → Quay flow with stochastic times"
+        },
+        {
+          "icon": "🗺️",
+          "title": "Geospatial",
+          "description": "OSMnx + NetworkX for real route calculation over street graphs"
+        },
+        {
+          "icon": "🎨",
+          "title": "3D Visualization",
+          "description": "Three.js + WebGL for interactive Digital Twin with full navigation"
+        },
+        {
+          "icon": "📊",
+          "title": "Dashboard",
+          "description": "Streamlit + Plotly for real-time KPIs and What-If analysis"
+        },
+        {
+          "icon": "🌱",
+          "title": "Green Port",
+          "description": "Dynamic CO2 emissions calculation by source and carbon intensity"
+        }
+      ],
+      "problemsSolved": [
+        {
+          "icon": "faShip",
+          "title": "Inefficient Cranes",
+          "desc": "We calculate the perfect sequence of operations, reducing unnecessary movements and unloading times."
+        },
+        {
+          "icon": "faTruck",
+          "title": "Truck Waiting Times",
+          "desc": "Synchronized Gate → Yard → Quay coordination, reducing wait times to 0.0–1.2 min."
+        },
+        {
+          "icon": "faAnchor",
+          "title": "Vessel Berthing (BAP)",
+          "desc": "Dynamic 3-wave allocation with departure cycles, efficiently processing 22 out of 24 vessels."
+        },
+        {
+          "icon": "faLeaf",
+          "title": "Pollutant Emissions",
+          "desc": "Dynamic CO2 calculation, achieving 83.46 kg CO2/TEU and complying with the MPA Green Port Programme."
+        }
+      ],
+      "terminalCases": [
+        {
+          "name": "Pasir Panjang",
+          "jobs": 240,
+          "ships": 6,
+          "wait": "0.0 min",
+          "efficiency": "13.9%"
+        },
+        {
+          "name": "Keppel",
+          "jobs": 280,
+          "ships": 7,
+          "wait": "0.0 min",
+          "efficiency": "10.0%"
+        },
+        {
+          "name": "Brani",
+          "jobs": 160,
+          "ships": 4,
+          "wait": "0.0 min",
+          "efficiency": "9.8%"
+        },
+        {
+          "name": "Tanjong Pagar",
+          "jobs": 200,
+          "ships": 5,
+          "wait": "0.1 min",
+          "efficiency": "15.3%"
+        }
+      ],
+      "techStack": [
+        "Google OR-Tools",
+        "SimPy",
+        "Three.js",
+        "OSMnx",
+        "NetworkX",
+        "Streamlit",
+        "Python",
+        "Large Neighborhood Search"
+      ],
+      "stakeholdersTitle": "Why This Matters",
+      "stakeholdersSubtitle": "Real impact on every actor in the port logistics chain.",
+      "stakeholders": [
+        {
+          "icon": "faBuilding",
+          "title": "Port Authorities (MPA)",
+          "benefits": [
+            "Greater global port competitiveness",
+            "Emission reduction aligned with IMO 2023 goals",
+            "Less congestion in surrounding streets",
+            "Precise data for infrastructure planning"
+          ]
+        },
+        {
+          "icon": "faShip",
+          "title": "Shipping Lines",
+          "benefits": [
+            "Ships on time, no costly delays",
+            "Lower operational costs (reduced port stay)",
+            "Total operational predictability",
+            "Environmental compliance (Green Port Programme)"
+          ]
+        },
+        {
+          "icon": "faTruck",
+          "title": "Transporters",
+          "benefits": [
+            "Less waiting time = more trips per day",
+            "Optimized routes, lower fuel consumption",
+            "Predictable operations with no surprises",
+            "Clear priority for special containers"
+          ]
+        },
+        {
+          "icon": "faUsers",
+          "title": "End Customers",
+          "benefits": [
+            "Faster deliveries",
+            "Lower product costs",
+            "Positive environmental impact",
+            "Complete cargo traceability"
+          ]
+        },
+        {
+          "icon": "faLeaf",
+          "title": "Singapore as a City",
+          "benefits": [
+            "Positioning as the world's smartest port",
+            "Reduced urban traffic congestion",
+            "Leadership in port sustainability",
+            "Attraction of more global maritime traffic"
+          ]
+        }
+      ],
+      "comparisonTitle": "What Makes Us Unique",
+      "comparisonSubtitle": "Direct comparison between traditional systems and our solution.",
+      "comparisonFeatureLabel": "Feature",
+      "comparisonTraditionalLabel": "Traditional Systems",
+      "comparisonOurSystemLabel": "Our System",
+      "comparison": [
+        {
+          "feature": "Planning",
+          "traditional": "Manual or simple rules",
+          "ours": "AI with CP-SAT + Dynamic BAP"
+        },
+        {
+          "feature": "Wait time",
+          "traditional": "30-60 minutes",
+          "ours": "0.0-1.2 min"
+        },
+        {
+          "feature": "Empty trips",
+          "traditional": "50%",
+          "ours": "12.9%"
+        },
+        {
+          "feature": "CO2 Emissions",
+          "traditional": "Not measured",
+          "ours": "85.71 kg CO2/TEU"
+        },
+        {
+          "feature": "Priorities",
+          "traditional": "Manual",
+          "ours": "Automatic (IMO)"
+        },
+        {
+          "feature": "Multi-terminal",
+          "traditional": "Not coordinated",
+          "ours": "Automatic LNS balancing"
+        },
+        {
+          "feature": "Ship management",
+          "traditional": "Static",
+          "ours": "3-wave BAP + dynamic sailing"
+        },
+        {
+          "feature": "Visualization",
+          "traditional": "Basic 2D",
+          "ours": "Professional 3D + animated 2D"
+        },
+        {
+          "feature": "Jobs processed",
+          "traditional": "40-120",
+          "ours": "880 jobs (24 ships)"
+        }
+      ],
+      "viewAllResultsBtn": "View All Results",
+      "viewArchitectureBtn": "View Full Architecture"
+    }
+  }
+}
