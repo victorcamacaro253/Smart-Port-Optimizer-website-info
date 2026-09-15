@@ -8,7 +8,7 @@ import {
   Factory,
   CheckCircle2,
   PieChart,
-  Activity 
+   
 } from 'lucide-react';
 import { operationalMetrics } from '../data/simulationLogs';
 

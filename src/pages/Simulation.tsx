@@ -1,7 +1,7 @@
 // src/pages/Simulation.tsx
 import  { useState, useEffect, useMemo } from 'react';
 import { Activity, Play, Pause, RotateCcw, Filter, Ship, Anchor, Truck, Warehouse, MapPin, AlertTriangle } from 'lucide-react';
-import { simulationLogs, LogEvent } from '../data/simulationLogs';
+import { simulationLogs } from '../data/simulationLogs';
 
 const Simulation = () => {
   const [isPlaying, setIsPlaying] = useState(false);
